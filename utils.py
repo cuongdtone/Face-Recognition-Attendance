@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+import playsound
 
 palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
 def compute_color_for_labels(label):
@@ -20,3 +22,9 @@ def center_match(now_center, people):
     d = np.array(d)
     return np.where(d == np.amin(d))[0][0]
 
+def play_sound(type=0):
+    path = 'sound/beep-0%d.mp3'%(type)
+    try:
+        playsound.playsound(path, True)
+    except:
+        pass

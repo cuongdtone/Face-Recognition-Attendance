@@ -70,24 +70,33 @@ def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue):
         frame_final_queue.put(frame)
     cap.release()
 
-def run_thread(cap):
-    frame_ori_queue = Queue(maxsize=2)
-    frame_detect_queue = Queue(maxsize=2)
-    data_recognize_queue = Queue(maxsize=2)
-    data_final_queue = Queue(maxsize=2)
-    frame_final_queue = Queue(maxsize=2)
+class face_thread():
+    def __init__(self, cap):
+        self.cap = cap
+        self.frame_ori_queue = Queue(maxsize=2)
+        self.frame_detect_queue = Queue(maxsize=2)
+        self.data_recognize_queue = Queue(maxsize=2)
+        self.data_final_queue = Queue(maxsize=2)
+        self.frame_final_queue = Queue(maxsize=2)
 
 
-    Thread(target=read_thread, args=[cap, frame_ori_queue, frame_detect_queue]).start()
-    Thread(target=detect_thread, args=[cap, frame_detect_queue, data_recognize_queue]).start()
-    Thread(target=recognize_thread, args=[cap, data_recognize_queue, data_final_queue]).start()
-    Thread(target=draw_thread, args=[cap, frame_ori_queue, data_final_queue, frame_final_queue]).start()
-    return frame_final_queue
+        self.read = Thread(target=read_thread, args=[self.cap, self.frame_ori_queue, self.frame_detect_queue])
+        self.detect = Thread(target=detect_thread, args=[self.cap, self.frame_detect_queue, self.data_recognize_queue])
+        self.recognize = Thread(target=recognize_thread, args=[self.cap, self.data_recognize_queue, self.data_final_queue])
+        self.draw = Thread(target=draw_thread, args=[self.cap, self.frame_ori_queue, self.data_final_queue, self.frame_final_queue])
+    def run(self):
+        self.read.start()
+        self.detect.start()
+        self.recognize.start()
+        self.draw.start()
+        return self.frame_final_queue
+
+
 
 if __name__ == '__main__':
     cap = cv2.VideoCapture('sample/TrumpvsBinden.mp4')
-    frame_final_queue = run_thread(cap)
-
+    face_recog = face_thread(cap)
+    frame_final_queue = face_recog.run()
     while True:
         timer = cv2.getTickCount()
         frame = frame_final_queue.get()
