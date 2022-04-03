@@ -6,11 +6,12 @@ from threading import Thread
 from utils import compute_color_for_labels, get_center, center_match
 
 face_model = Face_Model()
-count = 0
+count = 9
 out_people = [{'Name': 'uknown', 'Sim':  -1, 'Position': 'None', "Office":  'None', 'path': 'icon/unknown_person.jpg', 'center': np.array([0, 0])}]
 def read_thread(cap, frame_ori_queue, frame_detect_queue):
     while cap.isOpened():
         ret, frame = cap.read()
+        frame =  cv2.flip(frame, flipCode=1)
         if not ret: break
         frame_ori_queue.put(frame)
         frame_detect_queue.put(frame)
@@ -32,21 +33,22 @@ def recognize_thread(cap, data_recognize_queue, data_final_queue):
         faces = data['faces']
         kpss = data['kpss']
         people = []
-        if count >= 20:
+        if count >= 10:
             count = 0
             for idx, kps in enumerate(kpss):
                 feet = face_model.face_encoding(frame, kps)
                 info = face_model.face_compare(feet)
                 center = get_center(faces[idx])
-                info.update({'center': center})
+                info.update({'box': faces[idx]})
                 people.append(info)
         final_data = {'faces': faces, 'people': people}
         data_final_queue.put(final_data)
     cap.release()
-def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue):
+def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue, frame_ori2_queue):
     global out_people
     while cap.isOpened():
         frame = frame_ori_queue.get()
+        frame_ori2_queue.put(frame.copy())
         data = data_final_queue.get()
         faces = data['faces']
         people = data['people']
@@ -60,36 +62,40 @@ def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue):
                 i = center_match(now_center, people)
                 info = people[i]
                 color = compute_color_for_labels(sum([ord(character) for character in info['Name']]))
-                t_size = cv2.getTextSize(info['Name'], fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=1.0, thickness=1)[0]
+                name_display = info['Name'].split()[-1] + ' - %.2f'%(info['Sim'])
+                t_size = cv2.getTextSize(name_display, fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=1.0, thickness=1)[0]
                 cv2.rectangle(frame, (face_box[0], face_box[1]), (face_box[0] + t_size[0] + 10, face_box[1] + t_size[1] + 10), color, -1)
-                cv2.putText(frame, info['Name'], (face_box[0], face_box[1]+t_size[1]+5), cv2.FONT_HERSHEY_PLAIN,
+                cv2.putText(frame, name_display, (face_box[0], face_box[1]+t_size[1]+5), cv2.FONT_HERSHEY_PLAIN,
                             fontScale=1.0, color=(255, 255, 255), thickness=1, lineType=cv2.LINE_AA)
                 cv2.rectangle(frame, (face_box[0], face_box[1]), (face_box[2], face_box[3]), color, 2)
             except:
                 continue
-        frame_final_queue.put(frame)
+        frame_final_queue.put({'frame':frame, 'people': people})
+
     cap.release()
 
 class face_thread():
     def __init__(self, cap):
         self.cap = cap
         self.frame_ori_queue = Queue(maxsize=2)
+        self.frame_ori2_queue = Queue(maxsize=2)
         self.frame_detect_queue = Queue(maxsize=2)
         self.data_recognize_queue = Queue(maxsize=2)
         self.data_final_queue = Queue(maxsize=2)
         self.frame_final_queue = Queue(maxsize=2)
+        self.data_output_queue = Queue(maxsize=2)
 
 
         self.read = Thread(target=read_thread, args=[self.cap, self.frame_ori_queue, self.frame_detect_queue])
         self.detect = Thread(target=detect_thread, args=[self.cap, self.frame_detect_queue, self.data_recognize_queue])
         self.recognize = Thread(target=recognize_thread, args=[self.cap, self.data_recognize_queue, self.data_final_queue])
-        self.draw = Thread(target=draw_thread, args=[self.cap, self.frame_ori_queue, self.data_final_queue, self.frame_final_queue])
+        self.draw = Thread(target=draw_thread, args=[self.cap, self.frame_ori_queue, self.data_final_queue, self.frame_final_queue, self.frame_ori2_queue])
     def run(self):
         self.read.start()
         self.detect.start()
         self.recognize.start()
         self.draw.start()
-        return self.frame_final_queue
+        return self.frame_final_queue, self.frame_ori2_queue
 
 
 
