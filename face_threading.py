@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from Face import Face_Model
+from face import Face_Model
 from queue import Queue
 from threading import Thread
 from utils import compute_color_for_labels, get_center, center_match
