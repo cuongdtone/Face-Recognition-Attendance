@@ -3,7 +3,7 @@ import PyQt5
 import cv2
 import time
 import os
-from PyQt5 import QtGui
+from PyQt5 import QtGui, uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, \
     QWidget, QAction, QTabWidget, QVBoxLayout, QLabel, QStackedLayout, QLineEdit
 from PyQt5.QtGui import QIcon, QFont, QPixmap
@@ -12,9 +12,15 @@ import numpy as np
 from face_threading import face_thread
 from utils import play_sound
 from log import Log
+import yaml
 
-width = 1366
-height = 780
+with open('config.yaml', 'r') as f:
+    param = yaml.load(f, yaml.FullLoader)
+
+camera_id = param['camera']
+
+width = param['width']
+height = param['height']
 
 def set_color_for_object(obj, color=(0,0,0)):
     color = PyQt5.QtGui.QColor(color[0], color[1], color[2])
@@ -39,7 +45,7 @@ class DetectThread(QThread):
         self.log = log
     def run(self):
         # capture from web cam
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(camera_id)
         self.face_threading = face_thread(self.cap)
         final_frame_queue, frame_ori_queue = self.face_threading.run()
         #print(final_data_queue)
@@ -68,6 +74,7 @@ class App(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = 'Cuong Tran'
+        self.setWindowIcon(QIcon('icon/logo.png'))
         self.left = 0
         self.top = 0
         self.width = width
@@ -109,24 +116,23 @@ class MyTableWidget(QWidget):
 class Camera(QWidget):
     def __init__(self):
         super(Camera, self).__init__()
+        uic.loadUi('gui.ui', self)
 
         #Screen
-        self.screen = QLabel(self)
+        self.screen = self.findChild(QLabel, 'screen')
         self.screen.setText("Screen")
         self.screen.setAlignment(Qt.AlignCenter)
 
         x_screen, y_screen = norm_size(0.1, 0.1)
         self.screen_width, self.screen_height = norm_size(0.5, 0.7)
 
-        self.screen.setGeometry(x_screen, y_screen, self.screen_width, self.screen_height)
-        set_color_for_object(self.screen, (100, 100, 100))
 
         #Sub Screen
         self.sub_screen = QLabel(self)
         self.sub_screen.setText('Sub Screen')
         self.sub_screen.setAlignment(Qt.AlignCenter)
 
-        x_sub_screen, y_sub_screen  = x_screen + self.screen_width + 100, y_screen
+        x_sub_screen, y_sub_screen  = x_screen + self.screen_width + 150, y_screen
         self.width_sub_screen, self.height_sub_sceen = 200, 200
         self.sub_screen.setGeometry(x_sub_screen, y_sub_screen, self.width_sub_screen, self.height_sub_sceen)
         set_color_for_object(self.sub_screen, (100, 100, 100))
@@ -165,6 +171,11 @@ class Camera(QWidget):
     def stop(self):
         self.thread.stop()
         self.run_button.setEnabled(True)
+        try:
+            self.log.flag = False
+        except:
+            pass
+
 
     @pyqtSlot(np.ndarray)
     def update_timekeep(self, data):
@@ -172,7 +183,9 @@ class Camera(QWidget):
             face = data['face']
             qt_img = self.convert_cv_qt(face, self.width_sub_screen, self.height_sub_sceen)
             self.sub_screen.setPixmap(qt_img)
-            self.name_screen.setText('Name: ' + data['Name'] + '\nPosition: ' + data['Position'] + '\nOffice: ' + data['Office'])
+            self.name_screen.setText('Name: ' + data['Name'] +
+                                     '\nPosition: ' + data['Position'] +
+                                     '\nOffice: ' + data['Office']  + '\nTime: ' + data['Time'])
         except:
             pass
 
@@ -195,7 +208,6 @@ class Camera(QWidget):
 class AddEmployee(QWidget):
     def __init__(self):
         super(AddEmployee, self).__init__()
-
         # Load new info
         self.load_button
 

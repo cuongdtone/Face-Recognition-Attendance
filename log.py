@@ -12,6 +12,7 @@ import shutil
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from threading import Thread
+import time
 
 gauth = GoogleAuth()
 drive = GoogleDrive(gauth)
@@ -22,8 +23,9 @@ class Log():
         self.root_path = root_path
         self.log = pd.DataFrame({'Name': [], 'Position': [], 'Office': [], 'Time':[]})
         self.period_log = '' #time reset log
-        thread = Thread(target=self.flow_thread)
-        thread.start()
+        self.thread = Thread(target=self.flow_thread)
+        self.flag = True
+        self.thread.start()
 
     def timekeep(self, data):
         # data is dict: {'frame':frame, 'people': people}
@@ -66,11 +68,16 @@ class Log():
                     break
         #info = {'face':face, 'Name': name, 'Position':person['Position'], 'Office': person['Office']}
         try:
-            return {'face':face, 'Name': name, 'Position':person['Position'], 'Office': person['Office']}
+            return {'face':face,
+                    'Name': name,
+                    'Position':person['Position'],
+                    'Office': person['Office'],
+                    'Time': now.strftime('%a %H:%M:%S')
+                    }
         except:
             return None
     def flow_thread(self):
-        while True:
+        while self.flag:
             #print('[INFO] Hiden Task for upload is running !')
             now = datetime.now()
             today = now.strftime('%Y-%m-%d')
@@ -101,6 +108,7 @@ class Log():
                     week_log_df.to_csv(path_last_week_file, index=False)
                     gfile.SetContentFile(path_last_week_file)
                     gfile.Upload()
+
 
 
 
