@@ -77,8 +77,14 @@ class Log():
         except:
             return None
     def flow_thread(self):
-        while self.flag:
-            #print('[INFO] Hiden Task for upload is running !')
+        while True:
+            if self.flag is False: continue
+            print('[INFO] Hiden Task for upload is running !')
+            # checking server
+            gfile.SetContentFile('week_log/checksum.txt')
+            gfile.Upload()
+
+            time.sleep(86400) # 1 time/ 1 day for check uploading
             now = datetime.now()
             today = now.strftime('%Y-%m-%d')
             date_obj = datetime.strptime(today, '%Y-%m-%d')

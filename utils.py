@@ -31,3 +31,9 @@ def sound(type=0):
         pass
 def play_sound(type=0):
     Thread(target=sound, args=[type]).start()
+
+def save_new_image(dir, image):
+    c = 1
+    while os.path.exists(os.path.join(dir, '%d.jpg'%(c))):
+        c += 1
+    cv2.imwrite(os.path.join(dir, '%d.jpg'%(c)), image)

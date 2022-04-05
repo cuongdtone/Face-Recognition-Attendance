@@ -28,10 +28,10 @@ class Face_Model():
         #     pass
     def detect(self, img):
         return self.Face_Detection.detect(img, max_num=0, metric='default', input_size=(640, 640))
-    def create_data_file(self, name): 
+    def create_data_file(self, name, position, office):
         path_to_dir = os.path.join(self.root_path, name)
-        position = input("Position:  ")
-        office = input("Office:  ")
+        # position = input("Position:  ")
+        # office = input("Office:  ")
         list_img = glob.glob(path_to_dir+ '/*.jpg') + \
                    glob.glob(path_to_dir+ '/*.jpeg') + \
                    glob.glob(path_to_dir+ '/*.png')
