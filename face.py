@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
-from insightface.model_zoo import RetinaFace
-from insightface.model_zoo.arcface_onnx import ArcFaceONNX
-from insightface.app.common import Face
+from deepface import Face, RetinaFace, ArcFaceONNX
 import time
 import os
 import glob

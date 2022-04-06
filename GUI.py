@@ -17,6 +17,8 @@ from utils import play_sound, save_new_image
 from log import Log
 import yaml
 from glob import glob
+from ui_tab_1 import Tab_1
+from ui_tab_2 import Tab_2
 
 with open('config.yaml', 'r') as f:
     param = yaml.load(f, yaml.FullLoader)
@@ -40,6 +42,8 @@ def set_color_for_object(obj, color=(0,0,0)):
     obj.setStyleSheet("QLabel { background-color: rgba(" + values + "); }")
 def norm_size(w=0, h=0):
     return int(w*width), int(h*height)
+
+
 
 class DetectThread(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
@@ -136,47 +140,15 @@ class MyTableWidget(QWidget):
     def on_click(self):
         for currentQTableWidgetItem in self.tableWidget.selectedItems():
             print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
-class Camera(QWidget):
-    def __init__(self):
-        super(Camera, self).__init__()
-        uic.loadUi('gui.ui', self)
-
-        #Screen
-        self.screen = self.findChild(QLabel, 'screen')
-
-        x_screen, y_screen = norm_size(0.1, 0.1)
-        self.screen_width, self.screen_height = norm_size(0.5, 0.7)
-
-        #Sub Screen
-        self.sub_screen = QLabel(self)
-        self.sub_screen.setText('Sub Screen')
-        self.sub_screen.setAlignment(Qt.AlignCenter)
-
-        x_sub_screen, y_sub_screen  = x_screen + self.screen_width + 150, y_screen
+class Camera(QWidget, Tab_1):
+    def __init__(self, parent=None):
+        super(Camera, self).__init__(parent)
+        self.setupUi(self)
+        self.screen_width, self.screen_height = 720, 520
+        self.screen.resize(self.screen_width, self.screen_height)
         self.width_sub_screen, self.height_sub_sceen = 200, 200
-        self.sub_screen.setGeometry(x_sub_screen, y_sub_screen, self.width_sub_screen, self.height_sub_sceen)
-        set_color_for_object(self.sub_screen, (100, 100, 100))
 
-        # info
-        self.name_screen = QLabel(self)
-        self.name_screen.setText("Name: ")
-        x_name, y_name = x_sub_screen, y_sub_screen + self.height_sub_sceen + 50
-        self.name_screen.setGeometry(x_name, y_name, 300, 100)
-
-        #Run Button
-        self.run_button = QPushButton(self)
-        self.run_button.setText("Run")
-        x = int((x_screen + self.screen_width)/2.3)
-        y = y_screen + self.screen_height + 30
-        self.run_button.move(x, y)
         self.run_button.clicked.connect(self.run)
-
-        #Stop Button
-        self.stop_button = QPushButton(self)
-        self.stop_button.setText("Stop")
-        x = int((x_screen + self.screen_width)/1.6)
-        y = y_screen + self.screen_height + 30
-        self.stop_button.move(x, y)
         self.stop_button.clicked.connect(self.stop)
 
         self.log = Log()
@@ -215,11 +187,13 @@ class Camera(QWidget):
             face = data['face']
             qt_img = self.convert_cv_qt(face, self.width_sub_screen, self.height_sub_sceen)
             self.sub_screen.setPixmap(qt_img)
-            self.name_screen.setText('Name: ' + data['Name'] +
-                                     '\nPosition: ' + data['Position'] +
-                                     '\nOffice: ' + data['Office']  + '\nTime: ' + data['Time'])
-        except:
-            pass
+            self.name_screen.setText(data['Name'])
+            self.position_screen.setText(data['Position'])
+            self.office_screen.setText(data['Office'])
+            self.time_screen.setText(data['Time'])
+        except Exception:
+            print(traceback.format_exc())
+            print(sys.exc_info()[2])
 
     def update_image_main_screen(self, cv_img):
         """Updates the image_label with a new opencv image"""
@@ -229,36 +203,25 @@ class Camera(QWidget):
     def convert_cv_qt(self, cv_img, w_screen, h_screen):
         """Convert from an opencv image to QPixmap"""
         rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
-
+        rgb_image = cv2.resize(rgb_image, (w_screen, h_screen))
         #rgb_image = cv2.flip(rgb_image, flipCode=1)
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-        p = convert_to_Qt_format.scaled(w_screen-10, h_screen-10, Qt.KeepAspectRatio)
+        p = convert_to_Qt_format.scaled(w_screen, h_screen, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
 
-class AddEmployee(QWidget):
-    def __init__(self, root_path = 'Employee_Infomation'):
+class AddEmployee(QWidget, Tab_2):
+    def __init__(self, root_path='Employee_Infomation'):
         super(AddEmployee, self).__init__()
-        uic.loadUi('add_tab.ui', self)
+        self.setupUi(self)
 
         self.root_path = root_path
 
-        # screen
-        self.screen = self.findChild(QLabel, 'screen')
-
-        self.cap_button = self.findChild(QPushButton, 'cap')
         self.cap_button.clicked.connect(self.shot)
-
-        self.creat_person = self.findChild(QPushButton, 'add_complete')
-        self.creat_person.clicked.connect(self.create_data)
-
-        self.name = self.findChild(QLineEdit, 'name')
-        self.position = self.findChild(QLineEdit, 'position')
-        self.office = self.findChild(QLineEdit, 'office')
+        self.create_person.clicked.connect(self.create_data)
 
         self.face_model = Face_Model()
-
         self.shot_flag = False
 
         self.thread = CapThread()
