@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from deepface import Face, RetinaFace, ArcFaceONNX
+from .deepface import Face, RetinaFace, ArcFaceONNX
 import time
 import os
 import glob

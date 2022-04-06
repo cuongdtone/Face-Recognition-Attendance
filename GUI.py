@@ -5,14 +5,13 @@ import PyQt5
 import cv2
 import time
 import os
-from PyQt5 import QtGui, uic
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, \
-    QWidget, QAction, QTabWidget, QVBoxLayout, QLabel, QStackedLayout, QLineEdit, QMessageBox
-from PyQt5.QtGui import QIcon, QFont, QPixmap
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QTabWidget, QVBoxLayout, QMessageBox
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
 import numpy as np
-from face_threading import face_thread
-from face import Face_Model
+from Face_Recognition.face_threading import face_thread
+from Face_Recognition.face import Face_Model
 from utils import play_sound, save_new_image
 from log import Log
 import yaml

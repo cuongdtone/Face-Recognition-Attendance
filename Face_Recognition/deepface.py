@@ -9,7 +9,7 @@ import numpy as np
 import cv2
 import onnx
 import onnxruntime
-import face_align
+from Face_Recognition import face_align
 from numpy.linalg import norm as l2norm
 
 class _Feature:
