@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>780</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>150</y>
+     <width>281</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:400;&quot;&gt;Positon&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:400;&quot;&gt;Office&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:400;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="office">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="position">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="name">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="screen">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>120</y>
+     <width>720</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(136, 138, 133);
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Screen</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>70</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CAMERA&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>1366</width>
+     <height>768</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(46, 52, 54)</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::WinPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="create_person">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>460</y>
+     <width>111</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Completed</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cap_button">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>340</y>
+     <width>111</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Take a photo</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>110</y>
+     <width>341</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>NEW EMPLOYEE</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <zorder>label_6</zorder>
+  <zorder>gridLayoutWidget</zorder>
+  <zorder>screen</zorder>
+  <zorder>label_5</zorder>
+  <zorder>create_person</zorder>
+  <zorder>cap_button</zorder>
+  <zorder>label_7</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

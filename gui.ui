@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1382</width>
+    <height>782</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="screen">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>30</y>
+     <width>680</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(136, 138, 133);
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::WinPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="text">
+    <string>Screen</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>560</y>
+     <width>181</width>
+     <height>102</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="run_button">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="stop_button">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="sub_screen">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>30</y>
+     <width>200</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(136, 138, 133);
+border-color: rgb(255 ,255,255);
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::WinPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="text">
+    <string>Sub Screen</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>320</y>
+     <width>211</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="1">
+     <widget class="QLabel" name="time_screen">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="name_screen">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::WinPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="office_screen">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="position_screen">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 255, 255);
+background-color: rgb(136, 138, 133);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>1366</width>
+     <height>768</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(46, 52, 54)</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::WinPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>280</y>
+     <width>341</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);
+border-width : 1.5px;
+border-style:inset;
+border-radius: 8px;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+padding: 0 5px;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>INFORMATION</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>320</y>
+     <width>91</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="whatsThis">
+       <string/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffffff;&quot;&gt;Position&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffffff;&quot;&gt;Office&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="whatsThis">
+       <string/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffffff;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label">
+      <property name="styleSheet">
+       <string notr="true">font: 75 15pt &quot;Ubuntu Condensed&quot;;
+border-style:inset;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffffff;&quot;&gt;Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>screen</zorder>
+  <zorder>horizontalLayoutWidget</zorder>
+  <zorder>sub_screen</zorder>
+  <zorder>gridLayoutWidget</zorder>
+  <zorder>gridLayoutWidget_2</zorder>
+ </widget>
+ <resources>
+  <include location="icon/icon_resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

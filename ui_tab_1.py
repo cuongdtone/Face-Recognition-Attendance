@@ -16,85 +16,175 @@ class Tab_1(object):
         Form.setObjectName("Form")
         Form.resize(1382, 782)
         self.screen = QtWidgets.QLabel(Form)
-        self.screen.setGeometry(QtCore.QRect(120, 90, 680, 480))
-        self.screen.setStyleSheet("background-color: rgb(180, 180, 180);")
+        self.screen.setGeometry(QtCore.QRect(40, 30, 680, 480))
+        self.screen.setStyleSheet("background-color: rgb(136, 138, 133);\n"
+                                    "border-color: rgb(255 ,255,255);\n"
+                                    "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                    "border-width : 1.5px;\n"
+                                    "border-style:inset;\n"
+                                    "border-radius: 8px;\n"
+                                    "padding: 0 5px;\n"
+                                    "color: rgb(255, 255, 255);")
+        self.screen.setFrameShape(QtWidgets.QFrame.WinPanel)
+        self.screen.setFrameShadow(QtWidgets.QFrame.Raised)
         self.screen.setAlignment(QtCore.Qt.AlignCenter)
         self.screen.setObjectName("screen")
         self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(360, 620, 181, 102))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(290, 560, 181, 102))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.run_button = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.run_button.setMinimumSize(QtCore.QSize(55, 55))
-        self.run_button.setStyleSheet("background-image: url(icon/play.png)")
+        self.run_button.setMinimumSize(QtCore.QSize(50, 50))
+        self.run_button.setStyleSheet("QPushButton{\n"
+                                    "border-color: rgb(255 ,255,255);\n"
+                                    "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                    "background-color: rgb(136, 138, 133);\n"
+                                    "border-width : 1.5px;\n"
+                                    "border-style:inset;\n"
+                                    "border-radius: 8px;\n"
+                                    "padding: 0 5px;\n"
+                                    "color: rgb(255, 255, 255);\n"
+                                    "}")
         self.run_button.setText("")
         self.run_button.setObjectName("run_button")
         self.horizontalLayout_2.addWidget(self.run_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.stop_button = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.stop_button.setMinimumSize(QtCore.QSize(55, 55))
-        self.stop_button.setStyleSheet("background-image: url(icon/pause.png)")
+        self.stop_button.setMinimumSize(QtCore.QSize(50, 50))
+        self.stop_button.setStyleSheet("QPushButton{\n"
+                                        "border-color: rgb(255 ,255,255);\n"
+                                        "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                        "background-color: rgb(136, 138, 133);\n"
+                                        "border-width : 1.5px;\n"
+                                        "border-style:inset;\n"
+                                        "border-radius: 8px;\n"
+                                        "padding: 0 5px;\n"
+                                        "color: rgb(255, 255, 255);\n"
+                                        "}")
         self.stop_button.setText("")
         self.stop_button.setObjectName("stop_button")
         self.horizontalLayout_2.addWidget(self.stop_button)
         self.sub_screen = QtWidgets.QLabel(Form)
-        self.sub_screen.setGeometry(QtCore.QRect(1010, 90, 200, 200))
-        self.sub_screen.setStyleSheet("background-color: rgb(199, 195, 195);")
+        self.sub_screen.setGeometry(QtCore.QRect(930, 30, 200, 200))
+        self.sub_screen.setStyleSheet("background-color: rgb(136, 138, 133);\n"
+                                        "border-color: rgb(255 ,255,255);\n"
+                                        "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                        "border-width : 1.5px;\n"
+                                        "border-style:inset;\n"
+                                        "border-radius: 8px;\n"
+                                        "padding: 0 5px;\n"
+                                        "color: rgb(255, 255, 255);")
+        self.sub_screen.setFrameShape(QtWidgets.QFrame.WinPanel)
+        self.sub_screen.setFrameShadow(QtWidgets.QFrame.Raised)
         self.sub_screen.setAlignment(QtCore.Qt.AlignCenter)
         self.sub_screen.setObjectName("sub_screen")
         self.gridLayoutWidget = QtWidgets.QWidget(Form)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(960, 330, 271, 141))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(970, 320, 211, 141))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_2.setStyleSheet("")
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
         self.time_screen = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.time_screen.setText("")
+        self.time_screen.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+                                        "background-color: rgb(136, 138, 133);\n"
+                                        "border-width : 1.5px;\n"
+                                        "border-style:inset;\n"
+                                        "border-radius: 8px;\n"
+                                        "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                        "padding: 0 5px;\n"
+                                        "color: rgb(255, 255, 255);")
         self.time_screen.setObjectName("time_screen")
         self.gridLayout.addWidget(self.time_screen, 3, 1, 1, 1)
-        self.office_screen = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.office_screen.setText("")
-        self.office_screen.setObjectName("office_screen")
-        self.gridLayout.addWidget(self.office_screen, 2, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 2, 0, 1, 1)
-        self.position_screen = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.position_screen.setText("")
-        self.position_screen.setObjectName("position_screen")
-        self.gridLayout.addWidget(self.position_screen, 1, 1, 1, 1)
-        self.label = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 3, 0, 1, 1)
         self.name_screen = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.name_screen.setText("")
+        self.name_screen.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+                                        "background-color: rgb(136, 138, 133);\n"
+                                        "border-width : 1.5px;\n"
+                                        "border-style:inset;\n"
+                                        "border-radius: 8px;\n"
+                                        "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                        "padding: 0 5px;\n"
+                                        "color: rgb(255, 255, 255);")
+        self.name_screen.setFrameShape(QtWidgets.QFrame.WinPanel)
+        self.name_screen.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.name_screen.setTextFormat(QtCore.Qt.AutoText)
+        self.name_screen.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.name_screen.setObjectName("name_screen")
         self.gridLayout.addWidget(self.name_screen, 0, 1, 1, 1)
-        self.line = QtWidgets.QFrame(Form)
-        self.line.setGeometry(QtCore.QRect(1040, 320, 20, 161))
-        self.line.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
+        self.office_screen = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.office_screen.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+                                        "background-color: rgb(136, 138, 133);\n"
+                                        "border-width : 1.5px;\n"
+                                        "border-style:inset;\n"
+                                        "border-radius: 8px;\n"
+                                        "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                        "padding: 0 5px;\n"
+                                        "color: rgb(255, 255, 255);")
+        self.office_screen.setObjectName("office_screen")
+        self.gridLayout.addWidget(self.office_screen, 2, 1, 1, 1)
+        self.position_screen = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.position_screen.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+                                            "background-color: rgb(136, 138, 133);\n"
+                                            "border-width : 1.5px;\n"
+                                            "border-style:inset;\n"
+                                            "border-radius: 8px;\n"
+                                            "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                            "padding: 0 5px;\n"
+                                            "color: rgb(255, 255, 255);")
+        self.position_screen.setObjectName("position_screen")
+        self.gridLayout.addWidget(self.position_screen, 1, 1, 1, 1)
         self.label_5 = QtWidgets.QLabel(Form)
-        self.label_5.setGeometry(QtCore.QRect(90, 70, 1191, 561))
-        self.label_5.setStyleSheet("background-color: rgb(157, 157, 157);")
+        self.label_5.setGeometry(QtCore.QRect(20, 10, 1366, 768))
+        self.label_5.setStyleSheet("background-color: rgb(46, 52, 54)")
+        self.label_5.setFrameShape(QtWidgets.QFrame.WinPanel)
+        self.label_5.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_5.setText("")
         self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(Form)
+        self.label_6.setGeometry(QtCore.QRect(860, 280, 341, 191))
+        self.label_6.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+                                    "border-width : 1.5px;\n"
+                                    "border-style:inset;\n"
+                                    "border-radius: 8px;\n"
+                                    "font: 75 15pt \"Ubuntu Condensed\";\n"
+                                    "padding: 0 5px;\n"
+                                    "color: rgb(255, 255, 255);")
+        self.label_6.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_6.setObjectName("label_6")
+        self.gridLayoutWidget_2 = QtWidgets.QWidget(Form)
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(880, 320, 91, 141))
+        self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
+        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label_3.setWhatsThis("")
+        self.label_3.setStyleSheet("font: 75 15pt \"Ubuntu Condensed\";\nborder-style:inset;")
+        self.label_3.setObjectName("label_3")
+        self.gridLayout_2.addWidget(self.label_3, 1, 0, 1, 1)
+        self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label_4.setStyleSheet("font: 75 15pt \"Ubuntu Condensed\";\nborder-style:inset;")
+        self.label_4.setObjectName("label_4")
+        self.gridLayout_2.addWidget(self.label_4, 2, 0, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label_2.setWhatsThis("")
+        self.label_2.setStyleSheet("font: 75 15pt \"Ubuntu Condensed\";\nborder-style:inset;")
+        self.label_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
+        self.label = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label.setStyleSheet("font: 75 15pt \"Ubuntu Condensed\";\nborder-style:inset;")
+        self.label.setObjectName("label")
+        self.gridLayout_2.addWidget(self.label, 3, 0, 1, 1)
         self.label_5.raise_()
+        self.label_6.raise_()
         self.screen.raise_()
         self.horizontalLayoutWidget.raise_()
         self.sub_screen.raise_()
         self.gridLayoutWidget.raise_()
-        self.line.raise_()
+        self.gridLayoutWidget_2.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -103,23 +193,24 @@ class Tab_1(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.screen.setText(_translate("Form", "Screen"))
-        self.sub_screen.setText(_translate("Form", "Sub Sreen"))
-        self.label_3.setWhatsThis(_translate("Form", "<html><head/><body><p><br/></p></body></html>"))
-        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; font-style:italic; text-decoration: underline; color:#ffffff;\">Position</span></p></body></html>"))
-        self.label_2.setWhatsThis(_translate("Form", "<html><head/><body><p><br/></p></body></html>"))
-        self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; font-style:italic; text-decoration: underline; color:#ffffff;\">Name</span></p></body></html>"))
+        self.sub_screen.setText(_translate("Form", "Sub Screen"))
+        self.time_screen.setText(_translate("Form", "None"))
+        self.name_screen.setText(_translate("Form", "None"))
+        self.office_screen.setText(_translate("Form", "None"))
+        self.position_screen.setText(_translate("Form", "None"))
+        self.label_6.setText(_translate("Form", "INFORMATION"))
+        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; color:#ffffff;\">Position</span></p></body></html>"))
         self.label_4.setWhatsThis(_translate("Form", "<html><head/><body><p><br/></p></body></html>"))
-        self.label_4.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; font-style:italic; text-decoration: underline; color:#ffffff;\">Office</span></p></body></html>"))
-        self.label.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; font-style:italic; text-decoration: underline; color:#ffffff;\">Time</span></p></body></html>"))
-        self.label_5.setText(_translate("Form", "`"))
-
+        self.label_4.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; color:#ffffff;\">Office</span></p></body></html>"))
+        self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; color:#ffffff;\">Name</span></p></body></html>"))
+        self.label.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600; color:#ffffff;\">Time</span></p></body></html>"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Tab_1()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

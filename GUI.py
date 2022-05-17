@@ -30,6 +30,7 @@ height = param['height']
 use_camera = 1 #tab 1 is allow using camera
 thread_1_running = False
 
+
 def set_color_for_object(obj, color=(0,0,0)):
     color = PyQt5.QtGui.QColor(color[0], color[1], color[2])
     alpha = 140
@@ -39,9 +40,10 @@ def set_color_for_object(obj, color=(0,0,0)):
                                          a=alpha
                                          )
     obj.setStyleSheet("QLabel { background-color: rgba(" + values + "); }")
+
+
 def norm_size(w=0, h=0):
     return int(w*width), int(h*height)
-
 
 
 class DetectThread(QThread):
@@ -52,6 +54,7 @@ class DetectThread(QThread):
         super().__init__()
         self._run_flag = True
         self.log = log
+
     def run(self):
         # capture from web cam
         global use_camera
@@ -75,11 +78,13 @@ class DetectThread(QThread):
         self.cap.release()
         self.stop()
         # shut down capture system
+
     def stop(self):
         """Sets run flag to False and waits for thread to finish"""
         self._run_flag = False
         self.cap.release()
         self.wait()
+
 
 class CapThread(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
@@ -95,6 +100,7 @@ class CapThread(QThread):
             if ret:
                 self.change_pixmap_signal.emit(cv_img)
         cap.release()
+
 
 class App(QMainWindow):
 
@@ -113,6 +119,7 @@ class App(QMainWindow):
         self.setCentralWidget(self.table_widget)
 
         self.show()
+
 
 class MyTableWidget(QWidget):
 
@@ -139,6 +146,8 @@ class MyTableWidget(QWidget):
     def on_click(self):
         for currentQTableWidgetItem in self.tableWidget.selectedItems():
             print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
+
+
 class Camera(QWidget, Tab_1):
     def __init__(self, parent=None):
         super(Camera, self).__init__(parent)
@@ -147,7 +156,9 @@ class Camera(QWidget, Tab_1):
         self.screen.resize(self.screen_width, self.screen_height)
         self.width_sub_screen, self.height_sub_sceen = 200, 200
 
+        self.run_button.setIcon(QIcon('icon/play.png'))
         self.run_button.clicked.connect(self.run)
+        self.stop_button.setIcon(QIcon('icon/stop.png'))
         self.stop_button.clicked.connect(self.stop)
 
         self.log = Log()
@@ -210,14 +221,16 @@ class Camera(QWidget, Tab_1):
         p = convert_to_Qt_format.scaled(w_screen, h_screen, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
 
+
 class AddEmployee(QWidget, Tab_2):
     def __init__(self, root_path='Employee_Infomation'):
         super(AddEmployee, self).__init__()
         self.setupUi(self)
 
         self.root_path = root_path
-
+        self.cap_button.setIcon(QIcon('icon/camera.png'))
         self.cap_button.clicked.connect(self.shot)
+        self.create_person.setIcon(QIcon('icon/pause.png'))
         self.create_person.clicked.connect(self.create_data)
 
         self.face_model = Face_Model()
@@ -297,6 +310,7 @@ class AddEmployee(QWidget, Tab_2):
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         p = convert_to_Qt_format.scaled(w_screen-10, h_screen-10, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
