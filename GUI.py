@@ -16,8 +16,8 @@ from utils import play_sound, save_new_image
 from log import Log
 import yaml
 from glob import glob
-from ui_tab_1 import Tab_1
-from ui_tab_2 import Tab_2
+from ui_tab_1 import Ui_Form as Tab_1
+from ui_tab_2 import Ui_Form as Tab_2
 
 with open('config.yaml', 'r') as f:
     param = yaml.load(f, yaml.FullLoader)
