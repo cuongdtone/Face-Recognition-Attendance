@@ -6,6 +6,7 @@ import os
 import glob
 import pickle
 
+
 class Face_Model():
     def __init__(self, root_path='Employee_Infomation'): 
         # task is "half create":  create from directory image of employee
@@ -24,19 +25,21 @@ class Face_Model():
         # elif task == 'load': 
         #     #load data file:  position, office, feets
         #     pass
+
     def detect(self, img):
         return self.Face_Detection.detect(img, max_num=0, metric='default', input_size=(640, 640))
+
     def create_data_file(self, name, position, office):
         path_to_dir = os.path.join(self.root_path, name)
         # position = input("Position:  ")
         # office = input("Office:  ")
-        list_img = glob.glob(path_to_dir+ '/*.jpg') + \
-                   glob.glob(path_to_dir+ '/*.jpeg') + \
-                   glob.glob(path_to_dir+ '/*.png')
+        list_img = glob.glob(path_to_dir + '/*.jpg') + \
+                   glob.glob(path_to_dir + '/*.jpeg') + \
+                   glob.glob(path_to_dir + '/*.png')
         feets = {}
         for i in list_img: 
             image = cv2.imread(i)
-            #convert all format image to jpg
+            # convert all format image to jpg
             if i.split('.')[-1] != 'jpg': 
                 os.remove(i)
                 path = i.split('.')
@@ -54,6 +57,7 @@ class Face_Model():
         data = {'Name':  name, "Position":  position, "Office": office, 'feets': feets}
         with open(path_to_dir + '/data.pkl', 'wb') as f: 
             pickle.dump(data, f)
+
     def load_data(self, name): 
         path = os.path.join(self.root_path, name) + '/data.pkl'
         if os.path.exists(path): 
@@ -62,11 +66,13 @@ class Face_Model():
             return data
         else: 
             return False
+
     def face_encoding(self, image, kps): 
         face_box_class = {'kps':  kps}
         face_box_class = Face(face_box_class)
         feet = self.Face_Recognition.get(image, face_box_class)
         return feet
+
     def face_compare(self, feet, threshold=0.3):
         name_list = glob.glob(self.root_path+'/*')
         max_sim = -1
@@ -79,7 +85,7 @@ class Face_Model():
                 for key in feets.keys(): 
                     feet_compare = feets[key]
                     sim = self.Face_Recognition.compute_sim(feet, feet_compare)
-                    if sim>threshold and sim>max_sim: 
+                    if sim > threshold and sim > max_sim:
                         max_sim = sim
                         info['Name'] = data["Name"]
                         info['Sim'] = sim
