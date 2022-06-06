@@ -5,7 +5,7 @@ import PyQt5
 import cv2
 import time
 import os
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QTabWidget, QVBoxLayout, QMessageBox
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
@@ -18,6 +18,7 @@ import yaml
 from glob import glob
 from ui_tab_1 import Ui_Form as Tab_1
 from ui_tab_2 import Ui_Form as Tab_2
+from tab_show_database import Ui_Form as Show_database
 
 with open('config.yaml', 'r') as f:
     param = yaml.load(f, yaml.FullLoader)
@@ -133,10 +134,11 @@ class MyTableWidget(QWidget):
 
         self.tab1 = Camera()
         self.tab2 = AddEmployee()
-        self.tab3 = QWidget()
+        self.tab3 = ShowDatabase()
         # Add tabs
         self.tabs.addTab(self.tab1, "Camera")
         self.tabs.addTab(self.tab2, "Them nhan vien")
+        self.tabs.addTab(self.tab3, "show")
 
         #############################################
         self.layout.addWidget(self.tabs)
@@ -232,6 +234,13 @@ class AddEmployee(QWidget, Tab_2):
         self.cap_button.clicked.connect(self.shot)
         self.create_person.setIcon(QIcon('icon/pause.png'))
         self.create_person.clicked.connect(self.create_data)
+        self.button_show_database.clicked.connect(self.show_tab_database)
+
+        self.id.clear()
+        self.name.clear()
+        self.sex.clear()
+        self.position.clear()
+        self.office.clear()
 
         self.face_model = Face_Model()
         self.shot_flag = False
@@ -240,6 +249,15 @@ class AddEmployee(QWidget, Tab_2):
         self.thread.change_pixmap_signal.connect(self.update_image_main_screen)
         self.thread_cap_run = False
         self.show()
+
+    def show_tab_database(self):
+        tab_database = ShowDatabase()
+        self.widget = QtWidgets.QMainWindow()
+        self.show_tab = ShowDatabase()
+        self.show_tab.setupUi(self.widget)
+        self.widget.show()
+
+
     def shot(self):
         try:
             if self.name.text().strip() != '':
@@ -279,11 +297,14 @@ class AddEmployee(QWidget, Tab_2):
     def create_data(self):
         try:
             self.shot_flag = False
+            # clear
+            id = self.id.text()
             name = self.name.text()
             postion = self.position.text()
             office = self.office.text()
+            sex = self.sex.text()
 
-            self.face_model.create_data_file(name, postion, office)
+            self.face_model.create_data_file(id, name, postion, office, sex)
 
             self.name.setText('')
             self.position.setText('')
@@ -310,6 +331,23 @@ class AddEmployee(QWidget, Tab_2):
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         p = convert_to_Qt_format.scaled(w_screen-10, h_screen-10, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
+
+
+class ShowDatabase(QWidget, Show_database):
+    def __int__(self, parent=None):
+        super(ShowDatabase, self).__init__()
+        self.setupUi(self)
+        # self.thread = CapThread()
+        # self.thread.change_pixmap_signal.connect(self.update_show_database)
+        # self.thread_cap_run = False
+        # self.show()
+
+        # @pyqtSlot(np.ndarray)
+        # def update_show_database(self, data_:
+        #     """Updates the image_label with a new opencv image"""
+        #     self.tab
+        #     qt_img = self.convert_cv_qt(cv_img, 720, 480)
+        #     self.screen.setPixmap(qt_img)
 
 
 if __name__ == '__main__':

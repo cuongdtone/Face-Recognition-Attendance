@@ -22,12 +22,12 @@ def create_database(name_table):
 
         cur = con.cursor()
         cur.execute(f"DROP TABLE IF EXISTS {name_table}")
-        cur.execute(f"CREATE TABLE {name_table}(id TEXT PRIMARY KEY, fullname TEXT, sex INT, position TEXT, "
-                    f"embed BLOB, isactive INT, isadmin INT)")
+        cur.execute(f"CREATE TABLE {name_table}(id TEXT PRIMARY KEY, fullname TEXT, sex INT, position TEXT,"
+                    f" office TEXT, embed BLOB)")
         cur.close()
 
 
-def add_employee(data_tuple, name_table):
+def add_employee(data_tuple, name_table='employees'):
     """
     Function: add new employee
     Args:
@@ -43,7 +43,7 @@ def add_employee(data_tuple, name_table):
         cursor = con.cursor()
         print("Connected to SQLite")
         sqlite_insert_blob_query = f""" INSERT INTO {name_table}
-        (id, fullname, sex, position, embed, isactive, isadmin) VALUES (?, ?, ?, ?, ?, ?, ?)"""
+        (id, fullname, sex, position, office, embed) VALUES (?, ?, ?, ?, ?, ?)"""
         print(data_tuple)
         cursor.execute(sqlite_insert_blob_query, data_tuple)
         con.commit()
@@ -58,7 +58,7 @@ def add_employee(data_tuple, name_table):
             print("the sqlite connection is closed")
 
 
-def get_info(name_table):
+def get_all_employee(name_table='employees'):
     """
     Function: Get information of name_table
     Args:
@@ -75,11 +75,11 @@ def get_info(name_table):
         data = []
         for id, row in enumerate(rows):
             row = list(row)
-            for i in [4]:
+            for i in [len(row)-1]:
                 # convert binary to array
                 arr = np.frombuffer(row[i], dtype='float')
                 # convert array 1D to nD
-                row[i] = arr.reshape(len(arr)//3, 3).tolist()
+                row[i] = arr.reshape(len(arr)//512, 512).tolist()
             data.append(row)
         return data
 
@@ -145,22 +145,54 @@ def delete_employee(id, full_name, name_table):
             print("sqlite connection is closed")
 
 
+def insert_timekeeping(id: str, fullname: str):
+    """
+    insert timekeepings row
+    Args:
+        id:
+        fullname:
+
+    Returns:
+
+    """
+    try:
+        con = sqlite.connect(path)
+        cursor = con.cursor()
+        print("Connected to SQLite")
+        sqlite_insert_blob_query = f""" INSERT INTO timekeepings (id, fullname) VALUES (?, ?)"""
+        cursor.execute(sqlite_insert_blob_query, (id, fullname))
+        con.commit()
+        print("Data inserted successfully into a table")
+        cursor.close()
+
+    except sqlite.Error as error:
+        print("Failed to insert data into sqlite table", error)
+    finally:
+        if con:
+            con.close()
+            print("the sqlite connection is closed")
+
+
 if __name__ == '__main__':
     # create database for tab employee
     create_database('employee')
     # add info
-    embed = [[1, 2, 3], [2, 2, 3]]
+    embed =[]
+    a = np.ones((1, 512))[0].tolist()
+    b = np.zeros((1, 512))[0].tolist()
+    embed.append(a)
+    embed.append(b)
     embed = np.array(embed, dtype='float')
-    add_employee(('DEV01', 'Dao Duy Ngu', 1, 'Dev', embed, 1, 1), 'employee')
-    add_employee(('DEV02', 'Nguyen Vu Hoai Duy', 1, 'Dev', embed, 0, 0), 'employee')
-    add_employee(('DEV03', 'Tran Chi Cuong', 0, 'Dev', embed, 0, 1), 'employee')
+    add_employee(('DEV01', 'Dao Duy Ngu', 1, 'Dev', 'AI',embed,), 'employee')
+    add_employee(('DEV02', 'Nguyen Vu Hoai Duy', 1, 'Dev', 'AI', embed), 'employee')
+    add_employee(('DEV03', 'Tran Chi Cuong', 0, 'Dev', 'AI', embed), 'employee')
     # delete employee
     delete_employee('DEV01', 'Dao Duy Ngu', 'employee')
     # get employee
-    data = get_info('employee')
+    data = get_all_employee('employee')
     print(data)
     # change info
     update_info('FullName', 'Nguyen Van C', 'DEV02', 'Nguyen Vu Hoai Duy', 'employee')
-    data = get_info('employee')
+    data = get_all_employee('employee')
     print(data)
-
+    insert_timekeeping('DEV02', 'Dao Duy Ngu')

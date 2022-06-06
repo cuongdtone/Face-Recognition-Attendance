@@ -17,7 +17,7 @@ class Ui_Form(object):
         Form.resize(1366, 780)
         Form.setMinimumSize(QtCore.QSize(1366, 768))
         Form.setMaximumSize(QtCore.QSize(1920, 1080))
-        Form.setStyleSheet("background-color: rgb(46, 52, 54)")
+        Form.setStyleSheet("background-color: rgb(24, 23, 61)")
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
@@ -71,7 +71,7 @@ class Ui_Form(object):
 "color: rgb(255, 255, 255);")
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName("label_7")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_7)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.label_7)
         self.verticalLayout_2.addWidget(self.frame_6)
         self.frame_7 = QtWidgets.QFrame(self.frame_4)
         self.frame_7.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -84,41 +84,8 @@ class Ui_Form(object):
         self.formLayout_4.setSpacing(10)
         self.formLayout_4.setObjectName("formLayout_4")
         self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setSpacing(10)
         self.gridLayout.setObjectName("gridLayout")
-        self.office = QtWidgets.QLineEdit(self.frame_7)
-        self.office.setMaximumSize(QtCore.QSize(210, 30))
-        self.office.setStyleSheet("border-color: rgb(255, 255, 255);\n"
-"background-color: rgb(136, 138, 133);\n"
-"border-width : 1.5px;\n"
-"border-style:inset;\n"
-"border-radius: 8px;\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"padding: 0 5px;\n"
-"color: rgb(255, 255, 255);")
-        self.office.setObjectName("office")
-        self.gridLayout.addWidget(self.office, 2, 1, 1, 1)
-        self.label_3 = QtWidgets.QLabel(self.frame_7)
-        self.label_3.setMinimumSize(QtCore.QSize(90, 30))
-        self.label_3.setMaximumSize(QtCore.QSize(90, 30))
-        self.label_3.setStyleSheet("color: rgb(255, 255, 255);\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"border-style:inset;")
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
-        self.name = QtWidgets.QLineEdit(self.frame_7)
-        self.name.setMinimumSize(QtCore.QSize(210, 30))
-        self.name.setMaximumSize(QtCore.QSize(210, 30))
-        self.name.setStyleSheet("border-color: rgb(255, 255, 255);\n"
-"background-color: rgb(136, 138, 133);\n"
-"border-width : 1.5px;\n"
-"border-style:inset;\n"
-"border-radius: 8px;\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"padding: 0 5px;\n"
-"color: rgb(255, 255, 255);")
-        self.name.setText("")
-        self.name.setObjectName("name")
-        self.gridLayout.addWidget(self.name, 0, 1, 1, 1)
         self.position = QtWidgets.QLineEdit(self.frame_7)
         self.position.setMinimumSize(QtCore.QSize(210, 30))
         self.position.setMaximumSize(QtCore.QSize(210, 30))
@@ -131,15 +98,20 @@ class Ui_Form(object):
 "padding: 0 5px;\n"
 "color: rgb(255, 255, 255);")
         self.position.setObjectName("position")
-        self.gridLayout.addWidget(self.position, 1, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(self.frame_7)
-        self.label_4.setMinimumSize(QtCore.QSize(90, 30))
-        self.label_4.setMaximumSize(QtCore.QSize(90, 30))
-        self.label_4.setStyleSheet("color: rgb(255, 255, 255);\n"
+        self.gridLayout.addWidget(self.position, 3, 1, 1, 1)
+        self.name = QtWidgets.QLineEdit(self.frame_7)
+        self.name.setMinimumSize(QtCore.QSize(210, 30))
+        self.name.setMaximumSize(QtCore.QSize(210, 30))
+        self.name.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
-"border-style:inset;")
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 2, 0, 1, 1)
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);")
+        self.name.setObjectName("name")
+        self.gridLayout.addWidget(self.name, 1, 1, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.frame_7)
         self.label_2.setMinimumSize(QtCore.QSize(90, 30))
         self.label_2.setMaximumSize(QtCore.QSize(90, 30))
@@ -147,21 +119,89 @@ class Ui_Form(object):
 "font: 75 15pt \"Ubuntu Condensed\";\n"
 "border-style:inset;")
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        self.formLayout_4.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.gridLayout)
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+        self.label_4 = QtWidgets.QLabel(self.frame_7)
+        self.label_4.setMinimumSize(QtCore.QSize(90, 30))
+        self.label_4.setMaximumSize(QtCore.QSize(90, 30))
+        self.label_4.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"border-style:inset;")
+        self.label_4.setObjectName("label_4")
+        self.gridLayout.addWidget(self.label_4, 4, 0, 1, 1)
+        self.id = QtWidgets.QLineEdit(self.frame_7)
+        self.id.setMinimumSize(QtCore.QSize(210, 30))
+        self.id.setMaximumSize(QtCore.QSize(210, 30))
+        self.id.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);")
+        self.id.setObjectName("id")
+        self.gridLayout.addWidget(self.id, 0, 1, 1, 1)
+        self.office = QtWidgets.QLineEdit(self.frame_7)
+        self.office.setMaximumSize(QtCore.QSize(210, 30))
+        self.office.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);")
+        self.office.setObjectName("office")
+        self.gridLayout.addWidget(self.office, 4, 1, 1, 1)
+        self.label_3 = QtWidgets.QLabel(self.frame_7)
+        self.label_3.setMinimumSize(QtCore.QSize(90, 30))
+        self.label_3.setMaximumSize(QtCore.QSize(90, 30))
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"border-style:inset;")
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 3, 0, 1, 1)
+        self.sex = QtWidgets.QLineEdit(self.frame_7)
+        self.sex.setMinimumSize(QtCore.QSize(210, 30))
+        self.sex.setMaximumSize(QtCore.QSize(210, 30))
+        self.sex.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);")
+        self.sex.setObjectName("sex")
+        self.gridLayout.addWidget(self.sex, 2, 1, 1, 1)
+        self.label = QtWidgets.QLabel(self.frame_7)
+        self.label.setMinimumSize(QtCore.QSize(90, 30))
+        self.label.setMaximumSize(QtCore.QSize(90, 30))
+        self.label.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 18pt \"Ubuntu Condensed\";\n"
+"border-style:inset;")
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.label_6 = QtWidgets.QLabel(self.frame_7)
+        self.label_6.setMaximumSize(QtCore.QSize(90, 30))
+        self.label_6.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 18pt \"Ubuntu Condensed\";\n"
+"border-style:inset;")
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
+        self.formLayout_4.setLayout(0, QtWidgets.QFormLayout.SpanningRole, self.gridLayout)
         self.verticalLayout_2.addWidget(self.frame_7)
         self.verticalLayout_5.addWidget(self.frame_4)
         self.frame_5 = QtWidgets.QFrame(self.frame_2)
         self.frame_5.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
-        self.formLayout = QtWidgets.QFormLayout(self.frame_5)
-        self.formLayout.setLabelAlignment(QtCore.Qt.AlignCenter)
-        self.formLayout.setFormAlignment(QtCore.Qt.AlignCenter)
-        self.formLayout.setContentsMargins(50, 50, 0, 50)
-        self.formLayout.setSpacing(0)
-        self.formLayout.setObjectName("formLayout")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_5)
+        self.verticalLayout_4.setContentsMargins(0, 50, 0, 0)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setContentsMargins(50, -1, -1, -1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.cap_button = QtWidgets.QPushButton(self.frame_5)
         self.cap_button.setMinimumSize(QtCore.QSize(100, 100))
@@ -207,7 +247,42 @@ class Ui_Form(object):
         self.create_person.setIconSize(QtCore.QSize(100, 100))
         self.create_person.setObjectName("create_person")
         self.verticalLayout.addWidget(self.create_person, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.verticalLayout)
+        self.verticalLayout_4.addLayout(self.verticalLayout)
+        self.frame_8 = QtWidgets.QFrame(self.frame_5)
+        self.frame_8.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_8.setObjectName("frame_8")
+        self.formLayout = QtWidgets.QFormLayout(self.frame_8)
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignCenter)
+        self.formLayout.setFormAlignment(QtCore.Qt.AlignCenter)
+        self.formLayout.setContentsMargins(50, 0, 0, 0)
+        self.formLayout.setSpacing(0)
+        self.formLayout.setObjectName("formLayout")
+        self.button_show_database = QtWidgets.QPushButton(self.frame_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.button_show_database.sizePolicy().hasHeightForWidth())
+        self.button_show_database.setSizePolicy(sizePolicy)
+        self.button_show_database.setMinimumSize(QtCore.QSize(200, 50))
+        self.button_show_database.setMaximumSize(QtCore.QSize(200, 50))
+        self.button_show_database.setStyleSheet("QPushButton{\n"
+"border-color: rgb(255 ,255,255);\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(32, 74, 135);\n"
+"\n"
+"}")
+        self.button_show_database.setObjectName("button_show_database")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.button_show_database)
+        self.verticalLayout_4.addWidget(self.frame_8)
         self.verticalLayout_5.addWidget(self.frame_5)
         self.horizontalLayout_2.addWidget(self.frame_2)
         self.frame_3 = QtWidgets.QFrame(self.frame)
@@ -258,8 +333,8 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
         self.label_5.setSizePolicy(sizePolicy)
         self.label_5.setMinimumSize(QtCore.QSize(130, 30))
-        self.label_5.setStyleSheet("font: 75 15pt \"Ubuntu Condensed\";\n"
-"color: rgb(255, 255, 255);")
+        self.label_5.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 20pt \"Ubuntu Condensed\";")
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.formLayout_5.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.label_5)
@@ -274,9 +349,17 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_7.setText(_translate("Form", "NEW EMPLOYEE"))
-        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:400;\">Positon</span></p></body></html>"))
-        self.label_4.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:400;\">Office</span></p></body></html>"))
+        self.position.setText(_translate("Form", "None"))
+        self.name.setText(_translate("Form", "None"))
         self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:400;\">Name</span></p></body></html>"))
+        self.label_4.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:400;\">Office</span></p></body></html>"))
+        self.id.setText(_translate("Form", "None"))
+        self.office.setText(_translate("Form", "None"))
+        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:400;\">Positon</span></p></body></html>"))
+        self.sex.setText(_translate("Form", "None"))
+        self.label.setText(_translate("Form", "ID"))
+        self.label_6.setText(_translate("Form", "Sex"))
+        self.button_show_database.setText(_translate("Form", "Show Database"))
         self.screen.setText(_translate("Form", "Screen"))
         self.label_5.setText(_translate("Form", "<html><head/><body><p>CAMERA</p><p><br/></p></body></html>"))
 

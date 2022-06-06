@@ -13,6 +13,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from threading import Thread
 import time
+from test_sql import insert_timekeeping
 
 gauth = GoogleAuth()
 drive = GoogleDrive(gauth)
@@ -25,7 +26,9 @@ class Log():
         self.period_log = '' #time reset log
         self.thread = Thread(target=self.flow_thread)
         self.flag = True
-        self.thread.start()
+        # self.thread.start()
+
+        self.checkin_recent = {}
 
     def timekeep(self, data):
         # data is dict: {'frame':frame, 'people': people}
@@ -34,16 +37,7 @@ class Log():
         # we need csv log file include: Name, Position, Office, Login Time, Late (true of false),
         # self.period_log is [{Name, Position, Office, Login Time, Late}, ...]
         now = datetime.now()
-        today = now.strftime('%Y-%m-%d')
-        date_obj = datetime.strptime(today, '%Y-%m-%d')
-        monday = (date_obj - timedelta(days=date_obj.weekday())).strftime('%Y-%m-%d') # Monday
-        if not os.path.exists(self.root_path + '/' + monday):
-            os.mkdir(self.root_path + '/' + monday)
-        path_csv_today = self.root_path + '/' + monday + '/' + today + '.csv'
-        if not os.path.exists(path_csv_today):
-            self.log = pd.DataFrame({'Name': [], 'Position': [], 'Office': [], 'Time':[]})
-            self.log.to_csv(path_csv_today, index=False)
-        self.log = pd.read_csv(path_csv_today)
+
         people = data['people']
         frame = data['frame']
         for idx, person in enumerate(people):
@@ -53,20 +47,26 @@ class Log():
                 #play_sound(1)
                 #print()
             else:
-                check_name_list = name in self.log.iloc[:, 0].tolist() # only one timekeep per one period
-                if not check_name_list:
-                    attendance_info = pd.DataFrame({"Name": [name],
-                                                    "Position": [person['Position']],
-                                                    'Office': [person['Office']],
-                                                    'Time': now.strftime('%a %H:%M:%S')
-                                                    })
-                    self.log = self.log.append(attendance_info) # sucess
+                # print(self.checkin_recent)
+                check = person['id'] not in self.checkin_recent.keys()
+
+                if check:
                     face_box = [int(i) for i in person['box']]
                     face = frame[face_box[1]:face_box[3], face_box[0]:face_box[2], :]
+                    insert_timekeeping(person['id'], person['Name'])
                     play_sound(6)
-                    self.log.to_csv(path_csv_today, index=False)
+                    self.checkin_recent.update({person['id']: now})
                     break
-        #info = {'face':face, 'Name': name, 'Position':person['Position'], 'Office': person['Office']}
+
+                else:
+                    if (now - self.checkin_recent[person['id']]).total_seconds()>1:
+                        face_box = [int(i) for i in person['box']]
+                        face = frame[face_box[1]:face_box[3], face_box[0]:face_box[2], :]
+                        insert_timekeeping(person['id'], person['Name'])
+                        play_sound(6)
+                        self.checkin_recent.update({person['id']: now})
+                        break
+                self.checkin_recent.update({person['id']: now})
         try:
             return {'face':face,
                     'Name': name,
