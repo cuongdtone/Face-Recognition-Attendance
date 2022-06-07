@@ -5,7 +5,7 @@ import time
 import os
 import glob
 import pickle
-from test_sql import add_employee
+from Database.interface_sql import add_employee
 
 
 class Face_Model():
@@ -28,10 +28,8 @@ class Face_Model():
         #     #load data file:  position, office, feets
         #     pass
 
-
     def detect(self, img):
         return self.Face_Detection.detect(img, max_num=0, metric='default', input_size=(640, 640))
-
 
     def create_data_file(self, id, name, position, office, sex):
         path_to_dir = os.path.join(self.root_path, name)
@@ -62,7 +60,6 @@ class Face_Model():
         data = (id, name, sex, position, office, embed)
         add_employee(data)
 
-
     def load_data(self, name): 
         path = os.path.join(self.root_path, name) + '/data.pkl'
         if os.path.exists(path): 
@@ -78,18 +75,19 @@ class Face_Model():
         feet = self.Face_Recognition.get(image, face_box_class)
         return feet
 
-    def face_compare(self, feet, data,threshold=0.3):
+    def face_compare(self, feet, data, threshold=0.3):
         info = {'id': None, 'Name': 'uknown', 'Sim': 0, 'Position': 'None', 'Office': 'None'}
         for employee in data:
             feet2 = np.array(employee[5][0])
             sim = self.Face_Recognition.compute_sim(feet, feet2)
-            if sim>threshold:
+            if sim > threshold:
                 info['id'] = employee[0]
                 info['Name'] = employee[1]
                 info['Sim'] = sim
                 info['Position'] = employee[3]
                 info["Office"] = employee[4]
         return info
+
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt

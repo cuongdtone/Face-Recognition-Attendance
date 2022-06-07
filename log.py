@@ -1,5 +1,4 @@
 import datetime
-import csv
 import os.path
 import os
 from glob import glob
@@ -13,11 +12,12 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from threading import Thread
 import time
-from test_sql import insert_timekeeping
+from Database.interface_sql import insert_timekeeping
 
 gauth = GoogleAuth()
 drive = GoogleDrive(gauth)
 gfile = drive.CreateFile({'parents': [{'id': '1aMVU05zx1h-3MD1YCA2omjPlwzpuewb-'}]})
+
 
 class Log():
     def __init__(self, root_path='week_log'):

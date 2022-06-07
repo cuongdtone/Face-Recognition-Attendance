@@ -47,7 +47,7 @@ class Ui_Form(object):
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_4)
-        self.verticalLayout_2.setContentsMargins(50, 100, 0, 10)
+        self.verticalLayout_2.setContentsMargins(50, 50, 0, 10)
         self.verticalLayout_2.setSpacing(10)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame_6 = QtWidgets.QFrame(self.frame_4)

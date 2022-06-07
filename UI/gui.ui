@@ -26,7 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(46, 52, 54)</string>
+   <string notr="true">background-color: rgb(24, 23, 61)</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhLatinOnly</set>
@@ -66,18 +66,18 @@
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
-      <item>
+      <item alignment="Qt::AlignVCenter">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -108,7 +108,7 @@
           <number>50</number>
          </property>
          <property name="bottomMargin">
-          <number>100</number>
+          <number>90</number>
          </property>
          <item>
           <widget class="QFrame" name="frame_2">
@@ -208,7 +208,7 @@ color: rgb(255, 255, 255);</string>
            </layout>
           </widget>
          </item>
-         <item>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QFrame" name="frame_3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -364,7 +364,7 @@ QPushButton:pressed{
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="spacing">
-          <number>10</number>
+          <number>0</number>
          </property>
          <property name="leftMargin">
           <number>50</number>
@@ -420,7 +420,7 @@ QPushButton:pressed{
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0">
+            <item row="0" column="1">
              <widget class="QLabel" name="sub_screen">
               <property name="minimumSize">
                <size>

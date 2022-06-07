@@ -84,7 +84,7 @@ def get_all_employee(name_table='employees'):
         return data
 
 
-def update_info(name_rows, value_replace, id, full_name, name_table):
+def update_info(data_change: tuple, name_table='employees'):
     """
     Function: Again update information of employee
     Args:
@@ -101,8 +101,9 @@ def update_info(name_rows, value_replace, id, full_name, name_table):
         con = sqlite.connect(path)
         cursor = con.cursor()
         print("Connected to SQLite")
-        sql_update_query = f"""UPDATE {name_table} SET {name_rows} = ? Where id = ? AND fullName = ?"""
-        cursor.execute(sql_update_query, (value_replace, id, full_name))
+        sql_update_query = f"""UPDATE {name_table} SET fullname = ?, sex = ?, position = ?, office = ? 
+        Where id = {data_change[0]}"""
+        cursor.execute(sql_update_query, (data_change[1:5]))
         con.commit()
         print("Record update successfully")
         cursor.close()
@@ -115,12 +116,11 @@ def update_info(name_rows, value_replace, id, full_name, name_table):
             print("sqlite connection is closed")
 
 
-def delete_employee(id, full_name, name_table):
+def delete_employee(code_id: str, name_table='employees'):
     """
     function: Remove a object with id and full_name at name_table
     Args:
         id: data id
-        full_name: data name
         name_table: name of table
 
     Returns:
@@ -130,11 +130,10 @@ def delete_employee(id, full_name, name_table):
         con = sqlite.connect(path)
         cursor = con.cursor()
         print("Connected to SQLite")
-        sql_update_query = f"""DELETE FROM {name_table} Where id = ? AND fullName = ?"""
-        cursor.execute(sql_update_query, (id, full_name))
+        sql_update_query = f"""DELETE FROM {name_table} Where id = {code_id}"""
+        cursor.execute(sql_update_query)
         con.commit()
         print("Record deleted successfully")
-
         cursor.close()
 
     except sqlite.Error as error:
@@ -177,7 +176,7 @@ if __name__ == '__main__':
     # create database for tab employee
     create_database('employee')
     # add info
-    embed =[]
+    embed = []
     a = np.ones((1, 512))[0].tolist()
     b = np.zeros((1, 512))[0].tolist()
     embed.append(a)
@@ -187,12 +186,12 @@ if __name__ == '__main__':
     add_employee(('DEV02', 'Nguyen Vu Hoai Duy', 1, 'Dev', 'AI', embed), 'employee')
     add_employee(('DEV03', 'Tran Chi Cuong', 0, 'Dev', 'AI', embed), 'employee')
     # delete employee
-    delete_employee('DEV01', 'Dao Duy Ngu', 'employee')
+    delete_employee('DEV01')
     # get employee
     data = get_all_employee('employee')
     print(data)
     # change info
-    update_info('FullName', 'Nguyen Van C', 'DEV02', 'Nguyen Vu Hoai Duy', 'employee')
+    update_info(('106190023', 'Nguyen Van C', 1, 'DEV', 'AI'))
     data = get_all_employee('employee')
     print(data)
     insert_timekeeping('DEV02', 'Dao Duy Ngu')

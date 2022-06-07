@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
+        Form.setWindowModality(QtCore.Qt.NonModal)
         Form.resize(1366, 768)
         Form.setMinimumSize(QtCore.QSize(1366, 768))
         Form.setMaximumSize(QtCore.QSize(1920, 1080))
@@ -33,8 +34,6 @@ class Ui_Form(object):
         self.frame.setLineWidth(10)
         self.frame.setObjectName("frame")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
-        self.verticalLayout.setContentsMargins(20, 20, 20, 20)
-        self.verticalLayout.setSpacing(20)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setStyleSheet("color: rgb(255, 255, 255);\n"
@@ -105,17 +104,20 @@ class Ui_Form(object):
         self.table_database.verticalHeader().setVisible(True)
         self.table_database.verticalHeader().setCascadingSectionResizes(True)
         self.table_database.verticalHeader().setDefaultSectionSize(30)
-        self.table_database.verticalHeader().setHighlightSections(True)
+        self.table_database.verticalHeader().setHighlightSections(False)
         self.table_database.verticalHeader().setSortIndicatorShown(True)
-        self.table_database.verticalHeader().setStretchLastSection(True)
+        self.table_database.verticalHeader().setStretchLastSection(False)
         self.verticalLayout.addWidget(self.table_database)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.delete_database = QtWidgets.QPushButton(self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.delete_database.sizePolicy().hasHeightForWidth())
         self.delete_database.setSizePolicy(sizePolicy)
         self.delete_database.setMinimumSize(QtCore.QSize(150, 50))
+        self.delete_database.setMaximumSize(QtCore.QSize(150, 50))
         self.delete_database.setStyleSheet("QPushButton{\n"
 "border-color: rgb(255 ,255,255);\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
@@ -131,7 +133,32 @@ class Ui_Form(object):
 "\n"
 "}")
         self.delete_database.setObjectName("delete_database")
-        self.verticalLayout.addWidget(self.delete_database, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.horizontalLayout_3.addWidget(self.delete_database)
+        self.save_database = QtWidgets.QPushButton(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.save_database.sizePolicy().hasHeightForWidth())
+        self.save_database.setSizePolicy(sizePolicy)
+        self.save_database.setMinimumSize(QtCore.QSize(150, 50))
+        self.save_database.setMaximumSize(QtCore.QSize(150, 50))
+        self.save_database.setStyleSheet("QPushButton{\n"
+"border-color: rgb(255 ,255,255);\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"background-color: rgb(136, 138, 133);\n"
+"border-width : 1.5px;\n"
+"border-style:inset;\n"
+"border-radius: 8px;\n"
+"padding: 0 5px;\n"
+"color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(32, 74, 135);\n"
+"\n"
+"}")
+        self.save_database.setObjectName("save_database")
+        self.horizontalLayout_3.addWidget(self.save_database)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout.addWidget(self.frame)
 
         self.retranslateUi(Form)
@@ -153,6 +180,7 @@ class Ui_Form(object):
         item = self.table_database.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Office"))
         self.delete_database.setText(_translate("Form", "DELETE"))
+        self.save_database.setText(_translate("Form", "SAVE"))
 
 
 if __name__ == "__main__":

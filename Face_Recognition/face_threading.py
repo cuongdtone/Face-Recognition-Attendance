@@ -4,14 +4,16 @@ from .face import Face_Model
 from queue import Queue
 from threading import Thread
 from utils import compute_color_for_labels, get_center, center_match
-from test_sql import get_all_employee
+from Database.interface_sql import get_all_employee
 from unidecode import unidecode
 
 employees = get_all_employee()
 face_model = Face_Model()
 count = 9
-out_people = [{'Name': 'uknown', 'Sim':  -1, 'Position': 'None', "Office":  'None', 'path': 'icon/unknown_person.jpg', 'center': np.array([0, 0])}]
+out_people = [{'Name': 'uknown', 'Sim': -1, 'Position': 'None', "Office":  'None', 'path': 'icon/unknown_person.jpg', 'center': np.array([0, 0])}]
 checkin = {}
+
+
 def read_thread(cap, frame_ori_queue, frame_detect_queue):
     while cap.isOpened():
         ret, frame = cap.read()
@@ -20,6 +22,8 @@ def read_thread(cap, frame_ori_queue, frame_detect_queue):
         frame_ori_queue.put(frame)
         frame_detect_queue.put(frame)
     cap.release()
+
+
 def detect_thread(cap, frame_detect_queue, data_recognize_queue):
     global count
     while cap.isOpened():
@@ -29,6 +33,8 @@ def detect_thread(cap, frame_detect_queue, data_recognize_queue):
         put_data = {'frame': frame, 'faces':faces, 'kpss':kpss}
         data_recognize_queue.put(put_data)
     cap.release()
+
+
 def recognize_thread(cap, data_recognize_queue, data_final_queue):
     global count
     while cap.isOpened():
@@ -48,6 +54,8 @@ def recognize_thread(cap, data_recognize_queue, data_final_queue):
         final_data = {'faces': faces, 'people': people}
         data_final_queue.put(final_data)
     cap.release()
+
+
 def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue, frame_ori2_queue):
     global out_people
     while cap.isOpened():
@@ -78,6 +86,7 @@ def draw_thread(cap, frame_ori_queue, data_final_queue, frame_final_queue, frame
 
     cap.release()
 
+
 class face_thread():
     def __init__(self, cap):
         self.cap = cap
@@ -89,18 +98,17 @@ class face_thread():
         self.frame_final_queue = Queue(maxsize=2)
         self.data_output_queue = Queue(maxsize=2)
 
-
         self.read = Thread(target=read_thread, args=[self.cap, self.frame_ori_queue, self.frame_detect_queue])
         self.detect = Thread(target=detect_thread, args=[self.cap, self.frame_detect_queue, self.data_recognize_queue])
         self.recognize = Thread(target=recognize_thread, args=[self.cap, self.data_recognize_queue, self.data_final_queue])
         self.draw = Thread(target=draw_thread, args=[self.cap, self.frame_ori_queue, self.data_final_queue, self.frame_final_queue, self.frame_ori2_queue])
+
     def run(self):
         self.read.start()
         self.detect.start()
         self.recognize.start()
         self.draw.start()
         return self.frame_final_queue, self.frame_ori2_queue
-
 
 
 if __name__ == '__main__':
