@@ -11,7 +11,9 @@ conda create --name facelog python=3.8
 pip install -r requirements.txt
 ```
 ### Quick start
-```python GUI.py```
+```
+python GUI.py
+```
 ## Summary
 ***
 This is final project of Software technology 
