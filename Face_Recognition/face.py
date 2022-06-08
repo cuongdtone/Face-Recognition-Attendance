@@ -5,8 +5,11 @@ import time
 import os
 import glob
 import pickle
+from Database.interface_sql import add_employee
+
 
 class Face_Model():
+
     def __init__(self, root_path='Employee_Infomation'): 
         # task is "half create":  create from directory image of employee
         # task is "full create":  create with take photos
@@ -24,19 +27,19 @@ class Face_Model():
         # elif task == 'load': 
         #     #load data file:  position, office, feets
         #     pass
+
     def detect(self, img):
         return self.Face_Detection.detect(img, max_num=0, metric='default', input_size=(640, 640))
-    def create_data_file(self, name, position, office):
+
+    def create_data_file(self, id, name, position, office, sex):
         path_to_dir = os.path.join(self.root_path, name)
         # position = input("Position:  ")
         # office = input("Office:  ")
-        list_img = glob.glob(path_to_dir+ '/*.jpg') + \
-                   glob.glob(path_to_dir+ '/*.jpeg') + \
-                   glob.glob(path_to_dir+ '/*.png')
-        feets = {}
+        list_img = glob.glob(path_to_dir + '/*.jpg')
+        feets = []
         for i in list_img: 
             image = cv2.imread(i)
-            #convert all format image to jpg
+            # convert all format image to jpg
             if i.split('.')[-1] != 'jpg': 
                 os.remove(i)
                 path = i.split('.')
@@ -47,13 +50,16 @@ class Face_Model():
             try: 
                 faces, kpss = self.Face_Detection.detect(image, max_num=0, metric='default', input_size=(640, 640))
                 feet = self.face_encoding(image, kpss[0])
-                feet = {id_img: feet}
-                feets.update(feet)
+                feets.append(feet.tolist())
             except: 
                 continue
-        data = {'Name':  name, "Position":  position, "Office": office, 'feets': feets}
-        with open(path_to_dir + '/data.pkl', 'wb') as f: 
-            pickle.dump(data, f)
+        feets = np.sum(np.array(feets), axis=0) / len(feets)
+        print(feets)
+        embed = np.array(feets, dtype='float')
+        print(embed.shape)
+        data = (id, name, sex, position, office, embed)
+        add_employee(data)
+
     def load_data(self, name): 
         path = os.path.join(self.root_path, name) + '/data.pkl'
         if os.path.exists(path): 
@@ -62,33 +68,26 @@ class Face_Model():
             return data
         else: 
             return False
+
     def face_encoding(self, image, kps): 
         face_box_class = {'kps':  kps}
         face_box_class = Face(face_box_class)
         feet = self.Face_Recognition.get(image, face_box_class)
         return feet
-    def face_compare(self, feet, threshold=0.3):
-        name_list = glob.glob(self.root_path+'/*')
-        max_sim = -1
-        info = {'Name': 'uknown', 'Sim':  max_sim, 'Position': 'None', "Office":  'None', 'path': 'icon/unknown_person.jpg'}
-        for i in name_list: 
-            if os.path.exists(i+'/data.pkl'): 
-                with open(i+'/data.pkl', 'rb') as f: 
-                    data = pickle.load(f)
-                feets = data['feets']
-                for key in feets.keys(): 
-                    feet_compare = feets[key]
-                    sim = self.Face_Recognition.compute_sim(feet, feet_compare)
-                    if sim>threshold and sim>max_sim: 
-                        max_sim = sim
-                        info['Name'] = data["Name"]
-                        info['Sim'] = sim
-                        info['Position'] = data['Position']
-                        info["Office"] = data['Office']
-                        info['path'] = i + '/' + key + '.jpg'
-            else: 
-                continue
+
+    def face_compare(self, feet, data, threshold=0.3):
+        info = {'id': None, 'Name': 'uknown', 'Sim': 0, 'Position': 'None', 'Office': 'None'}
+        for employee in data:
+            feet2 = np.array(employee[5][0])
+            sim = self.Face_Recognition.compute_sim(feet, feet2)
+            if sim > threshold:
+                info['id'] = employee[0]
+                info['Name'] = employee[1]
+                info['Sim'] = sim
+                info['Position'] = employee[3]
+                info["Office"] = employee[4]
         return info
+
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
